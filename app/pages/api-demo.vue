@@ -37,7 +37,9 @@
     <!-- 手动触发请求示例 -->
     <section class="demo-section">
       <h2>4. 手动触发请求</h2>
-      <button @click="fetchManual" :disabled="manualStatus === 'pending'">
+      <button
+        @click="() => fetchManual()"
+        :disabled="manualStatus === 'pending'">
         {{ manualStatus === 'pending' ? '请求中...' : '点击发起请求' }}
       </button>
       <pre v-if="manualData">{{ manualData }}</pre>
@@ -46,7 +48,7 @@
     <!-- 刷新数据示例 -->
     <section class="demo-section">
       <h2>5. 刷新数据</h2>
-      <button @click="refreshDemo">刷新基础请求数据</button>
+      <button @click="() => refreshDemo()">刷新基础请求数据</button>
     </section>
   </div>
 </template>
@@ -73,13 +75,14 @@ interface User {
 }
 
 // 使用 useAPI 请求外部接口
+// data.value 直接是 User[] 类型，无需再 .data
 const {
   data: usersData,
   status: usersStatus,
   error: usersError
 } = await useAPI<User[]>('/users', {
   // 如果外部 API 无法访问，可以使用默认值
-  default: () => ({ code: 0, data: [], message: 'ok' })
+  default: () => []
 });
 
 // ============================================
@@ -88,7 +91,7 @@ const {
 const { data: lazyData, status: lazyStatus } = useLazyAPI<{ time: string }>(
   '/time',
   {
-    default: () => ({ code: 0, data: { time: '' }, message: 'ok' })
+    default: () => ({ time: '' })
   }
 );
 
@@ -101,7 +104,7 @@ const {
   execute: fetchManual
 } = useAPI<{ result: string }>('/manual-endpoint', {
   immediate: false, // 不立即执行
-  default: () => ({ code: 0, data: { result: '' }, message: 'ok' })
+  default: () => ({ result: '' })
 });
 
 // ============================================
