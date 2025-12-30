@@ -2,12 +2,13 @@
   <div class="app">
     <NuxtRouteAnnouncer />
     <!-- <NuxtWelcome /> -->
-    <NuxtLoadingIndicator color="red" :height="5" />
     <NuxtLayout>
       <NuxtLink v-for="link in links" :key="link.path" :to="link.path">{{
         link.name
       }}</NuxtLink>
-      <NuxtPage />
+      <NuxtPage>
+        <NuxtLoadingIndicator color="red" :height="5" />
+      </NuxtPage>
     </NuxtLayout>
   </div>
 </template>
