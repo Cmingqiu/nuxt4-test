@@ -23,14 +23,20 @@ jobs:
           debug: true
           command_timeout: 30m
           script: |
-            cd ${{ secrets.DEPLOY_PATH }}
+            set -e
+
+            DEPLOY_DIR="${{ secrets.DEPLOY_PATH }}"
+            DEPLOY_DIR="${DEPLOY_DIR:-/opt/nuxt4-test}"
+
+            echo "📂 进入部署目录: $DEPLOY_DIR"
+            cd "$DEPLOY_DIR" || { echo "❌ 目录不存在: $DEPLOY_DIR"; exit 1; }
 
             echo "📥 拉取最新代码..."
             git fetch origin
             git reset --hard origin/${{ github.ref_name }}
 
             echo "🐳 重新构建并启动服务..."
-            docker compose up --build -d --profile with-nginx
+            docker compose --profile with-nginx up --build -d
 
             echo "🧹 清理旧的镜像..."
             docker image prune -f
