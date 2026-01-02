@@ -1,0 +1,165 @@
+// ================================
+// 🎨 设计系统变量
+// ================================
+
+@use 'sass:map';
+
+// 断点系统
+$breakpoints: (
+  'xs': 0,
+  'sm': 576px,
+  'md': 768px,
+  'lg': 992px,
+  'xl': 1200px,
+  'xxl': 1400px
+);
+
+// 颜色系统 - 深色科技感主题
+$colors: (
+  // 主色调 - 电光蓝
+  'primary': #00d4ff,
+  'primary-dark': #0099cc,
+  'primary-light': #66e5ff,
+
+  // 强调色 - 霓虹紫
+  'accent': #a855f7,
+  'accent-dark': #7c3aed,
+  'accent-light': #c084fc,
+
+  // 辅助色 - 翡翠绿
+  'success': #10b981,
+  'warning': #f59e0b,
+  'error': #ef4444,
+
+  // 中性色
+  'dark': #0a0a0f,
+  'dark-soft': #12121a,
+  'dark-muted': #1a1a25,
+
+  'light': #ffffff,
+  'light-soft': #f8fafc,
+  'light-muted': #e2e8f0,
+
+  // 文字颜色
+  'text-primary': #ffffff,
+  'text-secondary': #94a3b8,
+  'text-muted': #64748b
+);
+
+// 获取颜色的函数
+@function color($key) {
+  @return map.get($colors, $key);
+}
+
+// 字体系统
+$font-family-primary: 'Outfit', 'Noto Sans SC', -apple-system,
+  BlinkMacSystemFont, sans-serif;
+$font-family-display: 'Outfit', sans-serif;
+$font-family-mono: 'JetBrains Mono', 'Fira Code', monospace;
+
+// 字体大小 - 流体排版
+$font-sizes: (
+  // clamp(最小值, 首选值, 最大值) 实现响应式字体大小，保证在不同屏幕宽度区间平滑缩放，且不会小于或大于指定范围
+  'xs': clamp(0.75rem, 0.7rem + 0.25vw, 0.875rem),
+  'sm': clamp(0.875rem, 0.8rem + 0.375vw, 1rem),
+  'base': clamp(1rem, 0.9rem + 0.5vw, 1.125rem),
+  'lg': clamp(1.125rem, 1rem + 0.625vw, 1.25rem),
+  'xl': clamp(1.25rem, 1.1rem + 0.75vw, 1.5rem),
+  '2xl': clamp(1.5rem, 1.2rem + 1.5vw, 2rem),
+  '3xl': clamp(1.875rem, 1.4rem + 2.375vw, 2.5rem),
+  '4xl': clamp(2.25rem, 1.6rem + 3.25vw, 3.5rem),
+  '5xl': clamp(3rem, 2rem + 5vw, 5rem)
+);
+
+@function font-size($key) {
+  @return map.get($font-sizes, $key);
+}
+
+// 字重
+$font-weights: (
+  'light': 300,
+  'regular': 400,
+  'medium': 500,
+  'semibold': 600,
+  'bold': 700
+);
+
+// 间距系统
+$spacing: (
+  '0': 0,
+  '1': 0.25rem,
+  '2': 0.5rem,
+  '3': 0.75rem,
+  '4': 1rem,
+  '5': 1.25rem,
+  '6': 1.5rem,
+  '8': 2rem,
+  '10': 2.5rem,
+  '12': 3rem,
+  '16': 4rem,
+  '20': 5rem,
+  '24': 6rem,
+  '32': 8rem
+);
+
+@function spacing($key) {
+  @return map.get($spacing, $key);
+}
+
+// 圆角
+$radius: (
+  'none': 0,
+  'sm': 0.25rem,
+  'base': 0.5rem,
+  'md': 0.75rem,
+  'lg': 1rem,
+  'xl': 1.5rem,
+  '2xl': 2rem,
+  'full': 9999px
+);
+
+// 阴影系统
+$shadows: (
+  'sm': 0 1px 2px 0 rgba(0, 0, 0, 0.05),
+  'base': (
+    0 1px 3px 0 rgba(0, 0, 0, 0.1),
+    0 1px 2px -1px rgba(0, 0, 0, 0.1)
+  ),
+  'md': (
+    0 4px 6px -1px rgba(0, 0, 0, 0.1),
+    0 2px 4px -2px rgba(0, 0, 0, 0.1)
+  ),
+  'lg': (
+    0 10px 15px -3px rgba(0, 0, 0, 0.1),
+    0 4px 6px -4px rgba(0, 0, 0, 0.1)
+  ),
+  'xl': (
+    0 20px 25px -5px rgba(0, 0, 0, 0.1),
+    0 8px 10px -6px rgba(0, 0, 0, 0.1)
+  ),
+  'glow': 0 0 20px rgba(0, 212, 255, 0.3),
+  'glow-accent': 0 0 20px rgba(168, 85, 247, 0.3)
+);
+
+// 过渡动画
+$transitions: (
+  'fast': 150ms ease,
+  'base': 250ms ease,
+  'slow': 350ms ease,
+  'spring': 500ms cubic-bezier(0.34, 1.56, 0.64, 1)
+);
+
+// 层级
+$z-index: (
+  'dropdown': 100,
+  'sticky': 200,
+  'fixed': 300,
+  'modal-backdrop': 400,
+  'modal': 500,
+  'popover': 600,
+  'tooltip': 700
+);
+
+// 容器宽度
+$container-max-width: 1280px;
+$container-padding: clamp(1rem, 5vw, 2rem);

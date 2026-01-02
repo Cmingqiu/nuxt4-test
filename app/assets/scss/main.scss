@@ -1,0 +1,384 @@
+// ================================
+// 🎯 主样式入口
+// ================================
+
+@use 'sass:map';
+// @use 'variables' as *;
+// @use 'mixins' as *;
+
+// ================================
+// CSS 变量（供 JS 使用）
+// ================================
+:root {
+  // 颜色
+  --color-primary: #{color('primary')};
+  --color-primary-dark: #{color('primary-dark')};
+  --color-primary-light: #{color('primary-light')};
+  --color-accent: #{color('accent')};
+  --color-accent-dark: #{color('accent-dark')};
+  --color-accent-light: #{color('accent-light')};
+  --color-dark: #{color('dark')};
+  --color-dark-soft: #{color('dark-soft')};
+  --color-dark-muted: #{color('dark-muted')};
+  --color-light: #{color('light')};
+  --color-text-primary: #{color('text-primary')};
+  --color-text-secondary: #{color('text-secondary')};
+  --color-text-muted: #{color('text-muted')};
+
+  // 字体
+  --font-primary: #{$font-family-primary};
+  --font-display: #{$font-family-display};
+
+  // 容器
+  --container-max-width: #{$container-max-width};
+  --container-padding: #{$container-padding};
+
+  // 头部高度
+  --header-height: 70px;
+
+  @include mobile-only {
+    --header-height: 60px;
+  }
+}
+
+// ================================
+// 基础重置
+// ================================
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 16px;
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  font-family: var(--font-primary);
+  font-size: font-size('base');
+  line-height: 1.6;
+  color: var(--color-text-primary);
+  background-color: var(--color-dark);
+  min-height: 100vh;
+  overflow-x: hidden;
+
+  @include custom-scrollbar(8px, color('dark-muted'), color('primary'));
+}
+
+// ================================
+// 排版
+// ================================
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--font-display);
+  font-weight: map.get($font-weights, 'semibold');
+  line-height: 1.2;
+  color: var(--color-text-primary);
+}
+
+h1 {
+  font-size: font-size('5xl');
+}
+h2 {
+  font-size: font-size('4xl');
+}
+h3 {
+  font-size: font-size('3xl');
+}
+h4 {
+  font-size: font-size('2xl');
+}
+h5 {
+  font-size: font-size('xl');
+}
+h6 {
+  font-size: font-size('lg');
+}
+
+p {
+  color: var(--color-text-secondary);
+  margin-bottom: spacing('4');
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
+
+a {
+  color: var(--color-primary);
+  text-decoration: none;
+  @include transition(color);
+
+  &:hover {
+    color: var(--color-primary-light);
+  }
+}
+
+// ================================
+// 图片和媒体
+// ================================
+img,
+video,
+svg {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+// ================================
+// 列表
+// ================================
+ul,
+ol {
+  list-style: none;
+}
+
+// ================================
+// 表单元素
+// ================================
+button {
+  @include button-reset;
+  @include focus-ring;
+}
+
+input,
+textarea,
+select {
+  font: inherit;
+  color: inherit;
+
+  &:focus {
+    outline: none;
+  }
+}
+
+// ================================
+// 容器
+// ================================
+.container {
+  @include container;
+}
+
+// ================================
+// 节段
+// ================================
+.section {
+  padding-block: spacing('16');
+
+  @include mobile-only {
+    padding-block: spacing('10');
+  }
+
+  &--hero {
+    padding-block: spacing('24');
+
+    @include mobile-only {
+      padding-block: spacing('16');
+    }
+  }
+}
+
+// ================================
+// 按钮组件
+// ================================
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: spacing('2');
+  padding: spacing('3') spacing('6');
+  font-size: font-size('base');
+  font-weight: map.get($font-weights, 'medium');
+  border-radius: map.get($radius, 'lg');
+  cursor: pointer;
+  @include transition(all);
+  @include focus-ring;
+
+  // 主要按钮
+  &--primary {
+    background: linear-gradient(
+      135deg,
+      var(--color-primary) 0%,
+      var(--color-primary-dark) 100%
+    );
+    color: var(--color-dark);
+    border: none;
+
+    &:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 30px rgba(0, 212, 255, 0.3);
+    }
+
+    &:active {
+      transform: translateY(0);
+    }
+  }
+
+  // 轮廓按钮
+  &--outline {
+    background: transparent;
+    color: var(--color-primary);
+    border: 2px solid var(--color-primary);
+
+    &:hover {
+      background: rgba(0, 212, 255, 0.1);
+      transform: translateY(-2px);
+    }
+  }
+
+  // 幽灵按钮
+  &--ghost {
+    background: transparent;
+    color: var(--color-text-secondary);
+    border: none;
+
+    &:hover {
+      color: var(--color-primary);
+      background: rgba(0, 212, 255, 0.1);
+    }
+  }
+
+  // 尺寸变体
+  &--sm {
+    padding: spacing('2') spacing('4');
+    font-size: font-size('sm');
+  }
+
+  &--lg {
+    padding: spacing('4') spacing('8');
+    font-size: font-size('lg');
+  }
+
+  // 图标按钮
+  &--icon {
+    padding: spacing('3');
+    aspect-ratio: 1;
+  }
+}
+
+// ================================
+// 卡片组件
+// ================================
+.card {
+  background: var(--color-dark-soft);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: map.get($radius, 'xl');
+  padding: spacing('6');
+  @include transition(all);
+
+  &:hover {
+    border-color: rgba(0, 212, 255, 0.2);
+    transform: translateY(-4px);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+  }
+
+  &--glass {
+    @include glass-dark(20px, 0.5);
+    border-color: rgba(255, 255, 255, 0.1);
+  }
+}
+
+// ================================
+// 徽章组件
+// ================================
+.badge {
+  display: inline-flex;
+  align-items: center;
+  padding: spacing('1') spacing('3');
+  font-size: font-size('xs');
+  font-weight: map.get($font-weights, 'medium');
+  border-radius: map.get($radius, 'full');
+  background: rgba(0, 212, 255, 0.1);
+  color: var(--color-primary);
+  border: 1px solid rgba(0, 212, 255, 0.2);
+}
+
+// ================================
+// 分隔线
+// ================================
+.divider {
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.1) 50%,
+    transparent
+  );
+  margin-block: spacing('8');
+}
+
+// ================================
+// 页面过渡动画
+// ================================
+.page-enter-active,
+.page-leave-active {
+  transition: opacity 300ms ease, transform 300ms ease;
+}
+
+.page-enter-from {
+  opacity: 0;
+  transform: translateY(20px);
+}
+
+.page-leave-to {
+  opacity: 0;
+  transform: translateY(-20px);
+}
+
+// ================================
+// 工具类
+// ================================
+.text-center {
+  text-align: center;
+}
+.text-left {
+  text-align: left;
+}
+.text-right {
+  text-align: right;
+}
+
+.text-gradient {
+  @include gradient-text(
+    linear-gradient(135deg, var(--color-primary) 0%, var(--color-accent) 100%)
+  );
+}
+
+.text-glow {
+  @include text-glow(color('primary'));
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+// 仅在指定设备显示
+.mobile-only {
+  @include desktop-only {
+    display: none !important;
+  }
+}
+
+.desktop-only {
+  @include mobile-only {
+    display: none !important;
+  }
+}
