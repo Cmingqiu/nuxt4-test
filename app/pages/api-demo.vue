@@ -54,6 +54,9 @@
 </template>
 
 <script setup lang="ts">
+definePageMeta({
+  layout: 'test-layout'
+});
 // ============================================
 // 示例 1: 内部 API 请求（直接使用 useFetch）
 // ============================================

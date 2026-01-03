@@ -36,6 +36,8 @@ export default defineNuxtConfig({
   runtimeConfig: {
     // 服务端私有配置
     apiSecret: '', // NUXT_API_SECRET
+    // API 代理目标服务器（服务端私有，不会暴露给客户端）
+    apiTarget: '', // NUXT_API_TARGET - 例如: https://api.example.com
 
     public: {
       // 客户端公开配置
@@ -77,5 +79,19 @@ export default defineNuxtConfig({
     '/about': { prerender: true },
     '/services': { prerender: true },
     '/contact': { prerender: true }
+
+    // 方式1： API 代理已通过 server/api/[...].ts 处理
+    // 该路由会处理所有 /api/** 请求，移除 /api 前缀后代理到目标服务器
+    // 目标服务器可通过环境变量 NUXT_API_TARGET 或 NUXT_PUBLIC_API_URL 配置
+
+    // 方式2： API 代理 - 将 /api 路径代理到目标服务器
+    // 注意：如果目标服务器需要移除 /api 前缀，请使用 server/middleware 处理
+    /*  '/api/**': {
+      proxy: 'https://api.example.com/**'
+    } */
+    // 图片资源代理示例
+    /* '/uploads/**': {
+      proxy: 'http://cdn.example.com/**'
+    } */
   }
 });
