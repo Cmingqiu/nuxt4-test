@@ -63,8 +63,11 @@ watch(isMobileMenuOpen, (isOpen: boolean) => {
         </NuxtLink>
       </nav>
 
-      <!-- 桌面端 CTA 按钮 -->
+      <!-- 桌面端操作区 -->
       <div class="header__actions desktop-only">
+        <!-- 主题切换 -->
+        <ThemeToggle />
+        <!-- CTA 按钮 -->
         <NuxtLink to="/contact" class="btn btn--primary btn--sm">
           立即咨询
         </NuxtLink>
@@ -96,6 +99,11 @@ watch(isMobileMenuOpen, (isOpen: boolean) => {
           </NuxtLink>
 
           <div class="header__mobile-cta">
+            <!-- 主题切换 -->
+            <div class="header__mobile-theme">
+              <ThemeToggle />
+            </div>
+            <!-- CTA 按钮 -->
             <NuxtLink
               to="/contact"
               class="btn btn--primary"
@@ -291,9 +299,10 @@ watch(isMobileMenuOpen, (isOpen: boolean) => {
     left: 0;
     right: 0;
     bottom: 0;
-    background: var(--color-dark);
+    background: var(--color-bg);
     overflow-y: auto;
     @include safe-area-padding;
+    transition: background-color 0.3s ease;
   }
 
   &__mobile-nav-inner {
@@ -333,6 +342,12 @@ watch(isMobileMenuOpen, (isOpen: boolean) => {
     .btn {
       width: 100%;
     }
+  }
+
+  &__mobile-theme {
+    margin-bottom: spacing('4');
+    display: flex;
+    justify-content: center;
   }
 }
 

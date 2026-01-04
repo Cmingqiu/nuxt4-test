@@ -10,20 +10,13 @@
 // CSS 变量（供 JS 使用）
 // ================================
 :root {
-  // 颜色
+  // 主色调（主题无关）
   --color-primary: #{color('primary')};
   --color-primary-dark: #{color('primary-dark')};
   --color-primary-light: #{color('primary-light')};
   --color-accent: #{color('accent')};
   --color-accent-dark: #{color('accent-dark')};
   --color-accent-light: #{color('accent-light')};
-  --color-dark: #{color('dark')};
-  --color-dark-soft: #{color('dark-soft')};
-  --color-dark-muted: #{color('dark-muted')};
-  --color-light: #{color('light')};
-  --color-text-primary: #{color('text-primary')};
-  --color-text-secondary: #{color('text-secondary')};
-  --color-text-muted: #{color('text-muted')};
 
   // 字体
   --font-primary: #{$font-family-primary};
@@ -39,6 +32,34 @@
   @include mobile-only {
     --header-height: 60px;
   }
+}
+
+// 暗黑主题变量
+:root.dark {
+  --color-bg: #{color('dark')};
+  --color-bg-soft: #{color('dark-soft')};
+  --color-bg-muted: #{color('dark-muted')};
+  --color-text-primary: #{color('text-primary')};
+  --color-text-secondary: #{color('text-secondary')};
+  --color-text-muted: #{color('text-muted')};
+}
+
+// 浅色主题变量
+:root:not(.dark) {
+  --color-bg: #{color('light')};
+  --color-bg-soft: #{color('light-soft')};
+  --color-bg-muted: #{color('light-muted')};
+  --color-text-primary: #{color('dark')};
+  --color-text-secondary: #{color('text-secondary')};
+  --color-text-muted: #{color('text-muted')};
+}
+
+// 向后兼容（保持旧变量名）
+:root {
+  --color-dark: var(--color-bg);
+  --color-dark-soft: var(--color-bg-soft);
+  --color-dark-muted: var(--color-bg-muted);
+  --color-light: var(--color-bg);
 }
 
 // ================================
@@ -64,11 +85,12 @@ body {
   font-size: font-size('base');
   line-height: 1.6;
   color: var(--color-text-primary);
-  background-color: var(--color-dark);
+  background-color: var(--color-bg);
   min-height: 100vh;
   overflow-x: hidden;
+  transition: background-color 0.3s ease, color 0.3s ease;
 
-  @include custom-scrollbar(8px, color('dark-muted'), color('primary'));
+  @include custom-scrollbar(8px, var(--color-bg-muted), color('primary'));
 }
 
 // ================================
@@ -270,7 +292,7 @@ select {
 // 卡片组件
 // ================================
 .card {
-  background: var(--color-dark-soft);
+  background: var(--color-bg-soft);
   border: 1px solid rgba(255, 255, 255, 0.05);
   border-radius: map.get($radius, 'xl');
   padding: spacing('6');
@@ -285,6 +307,16 @@ select {
   &--glass {
     @include glass-dark(20px, 0.5);
     border-color: rgba(255, 255, 255, 0.1);
+  }
+}
+
+// 浅色主题下的卡片样式
+:root:not(.dark) .card {
+  border-color: rgba(0, 0, 0, 0.1);
+
+  &:hover {
+    border-color: rgba(0, 212, 255, 0.3);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
   }
 }
 

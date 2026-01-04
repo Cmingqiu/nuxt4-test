@@ -24,6 +24,7 @@ export default defineNuxtConfig({
   css: ['@/assets/scss/main.scss'],
 
   modules: [
+    '@nuxtjs/tailwindcss',
     // '@nuxt/eslint',
     // '@nuxt/ui',
     // '@nuxt/image',

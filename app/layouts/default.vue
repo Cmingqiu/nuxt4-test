@@ -61,6 +61,11 @@ onMounted(() => {
   &__grid {
     @include absolute-fill;
     @include grid-background(60px, rgba(255, 255, 255, 0.02));
+    
+    // 浅色主题下的网格
+    :global(:not(.dark)) & {
+      @include grid-background(60px, rgba(0, 0, 0, 0.02));
+    }
   }
 
   &__gradient {
