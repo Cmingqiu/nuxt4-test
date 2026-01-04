@@ -3,8 +3,8 @@
 // ================================
 
 @use 'sass:map';
-// @use 'variables' as *;
-// @use 'mixins' as *;
+@use 'variables' as *;
+@use 'mixins' as *;
 
 // ================================
 // CSS 变量（供 JS 使用）
@@ -34,22 +34,22 @@
   }
 }
 
-// 暗黑主题变量
+// 默认浅色主题变量
+:root {
+  --color-bg: #{color('light')};
+  --color-bg-soft: #{color('light-soft')};
+  --color-bg-muted: #{color('light-muted')};
+  --color-text-primary: #{color('dark')};
+  --color-text-secondary: #475569;
+  --color-text-muted: #334155;
+}
+
+// 暗黑主题变量（优先级更高）
 :root.dark {
   --color-bg: #{color('dark')};
   --color-bg-soft: #{color('dark-soft')};
   --color-bg-muted: #{color('dark-muted')};
   --color-text-primary: #{color('text-primary')};
-  --color-text-secondary: #{color('text-secondary')};
-  --color-text-muted: #{color('text-muted')};
-}
-
-// 浅色主题变量
-:root:not(.dark) {
-  --color-bg: #{color('light')};
-  --color-bg-soft: #{color('light-soft')};
-  --color-bg-muted: #{color('light-muted')};
-  --color-text-primary: #{color('dark')};
   --color-text-secondary: #{color('text-secondary')};
   --color-text-muted: #{color('text-muted')};
 }

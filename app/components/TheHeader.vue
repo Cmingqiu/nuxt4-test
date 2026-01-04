@@ -140,12 +140,18 @@ watch(isMobileMenuOpen, (isOpen: boolean) => {
   }
 
   &--scrolled::before {
-    background: rgba(10, 10, 15, 0.8);
+    background: var(--color-bg-soft);
+    opacity: 0.95;
     border-bottom-color: rgba(255, 255, 255, 0.05);
+    
+    :global(:not(.dark)) & {
+      border-bottom-color: rgba(0, 0, 0, 0.1);
+    }
   }
 
   &--menu-open::before {
-    background: rgba(10, 10, 15, 0.95);
+    background: var(--color-bg);
+    opacity: 0.98;
   }
 
   &__container {

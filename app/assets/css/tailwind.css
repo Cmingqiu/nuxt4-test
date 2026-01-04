@@ -1,0 +1,4 @@
+/* Tailwind CSS 基础指令 */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;

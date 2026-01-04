@@ -20,11 +20,16 @@ export default defineNuxtConfig({
     }
   },
 
-  // 全局 CSS
-  css: ['@/assets/scss/main.scss'],
-
+  // 全局 CSS（Tailwind 必须在 SCSS 之前）
+  css: ['@/assets/css/tailwind.css', '@/assets/scss/main.scss'],
+  postcss: {
+    plugins: {
+      tailwindcss: {},
+      autoprefixer: {}
+    }
+  },
   modules: [
-    '@nuxtjs/tailwindcss',
+    // '@nuxtjs/tailwindcss',
     // '@nuxt/eslint',
     // '@nuxt/ui',
     // '@nuxt/image',
@@ -62,6 +67,32 @@ export default defineNuxtConfig({
         },
         { name: 'description', content: '现代化响应式官方网站' },
         { name: 'format-detection', content: 'telephone=no' }
+      ],
+      script: [
+        {
+          innerHTML: `
+            (function(){
+              try {
+                const theme = localStorage.getItem('nuxt-theme') || 'system';
+                const getSystemTheme = () => {
+                  return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+                };
+                const effectiveTheme = theme === 'system' ? getSystemTheme() : theme;
+                const root = document.documentElement;
+                if (effectiveTheme === 'dark') {
+                  root.classList.add('dark');
+                } else {
+                  root.classList.remove('dark');
+                }
+                console.log('[Theme Init] 主题初始化:', theme, '->', effectiveTheme);
+              } catch (e) {
+                console.error('[Theme Init] 错误:', e);
+              }
+            })();
+          `,
+          type: 'text/javascript',
+          tagPosition: 'head'
+        }
       ],
       link: [
         { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
