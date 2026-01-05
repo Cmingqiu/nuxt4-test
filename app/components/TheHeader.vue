@@ -142,11 +142,7 @@ watch(isMobileMenuOpen, (isOpen: boolean) => {
   &--scrolled::before {
     background: var(--color-bg-soft);
     opacity: 0.95;
-    border-bottom-color: rgba(255, 255, 255, 0.05);
-    
-    :global(:not(.dark)) & {
-      border-bottom-color: rgba(0, 0, 0, 0.1);
-    }
+    border-bottom-color: var(--color-border-light);
   }
 
   &--menu-open::before {
@@ -220,7 +216,7 @@ watch(isMobileMenuOpen, (isOpen: boolean) => {
 
     &:hover {
       color: var(--color-text-primary);
-      background: rgba(255, 255, 255, 0.05);
+      background: var(--color-border-light);
     }
 
     &--active {
@@ -340,7 +336,7 @@ watch(isMobileMenuOpen, (isOpen: boolean) => {
   &__mobile-cta {
     margin-top: spacing('6');
     padding-top: spacing('6');
-    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    border-top: 1px solid var(--color-border);
     animation: slideIn 300ms ease forwards;
     animation-delay: 250ms;
     opacity: 0;

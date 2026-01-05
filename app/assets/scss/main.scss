@@ -5,62 +5,7 @@
 @use 'sass:map';
 @use 'variables' as *;
 @use 'mixins' as *;
-
-// ================================
-// CSS 变量（供 JS 使用）
-// ================================
-:root {
-  // 主色调（主题无关）
-  --color-primary: #{color('primary')};
-  --color-primary-dark: #{color('primary-dark')};
-  --color-primary-light: #{color('primary-light')};
-  --color-accent: #{color('accent')};
-  --color-accent-dark: #{color('accent-dark')};
-  --color-accent-light: #{color('accent-light')};
-
-  // 字体
-  --font-primary: #{$font-family-primary};
-  --font-display: #{$font-family-display};
-
-  // 容器
-  --container-max-width: #{$container-max-width};
-  --container-padding: #{$container-padding};
-
-  // 头部高度
-  --header-height: 70px;
-
-  @include mobile-only {
-    --header-height: 60px;
-  }
-}
-
-// 默认浅色主题变量
-:root {
-  --color-bg: #{color('light')};
-  --color-bg-soft: #{color('light-soft')};
-  --color-bg-muted: #{color('light-muted')};
-  --color-text-primary: #{color('dark')};
-  --color-text-secondary: #475569;
-  --color-text-muted: #334155;
-}
-
-// 暗黑主题变量（优先级更高）
-:root.dark {
-  --color-bg: #{color('dark')};
-  --color-bg-soft: #{color('dark-soft')};
-  --color-bg-muted: #{color('dark-muted')};
-  --color-text-primary: #{color('text-primary')};
-  --color-text-secondary: #{color('text-secondary')};
-  --color-text-muted: #{color('text-muted')};
-}
-
-// 向后兼容（保持旧变量名）
-:root {
-  --color-dark: var(--color-bg);
-  --color-dark-soft: var(--color-bg-soft);
-  --color-dark-muted: var(--color-bg-muted);
-  --color-light: var(--color-bg);
-}
+@use 'theme';
 
 // ================================
 // 基础重置
@@ -233,7 +178,7 @@ select {
       var(--color-primary) 0%,
       var(--color-primary-dark) 100%
     );
-    color: var(--color-dark);
+    color: #{color('dark')};
     border: none;
 
     &:hover {
@@ -293,30 +238,21 @@ select {
 // ================================
 .card {
   background: var(--color-bg-soft);
-  border: 1px solid rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--color-border-light);
   border-radius: map.get($radius, 'xl');
   padding: spacing('6');
   @include transition(all);
 
   &:hover {
-    border-color: rgba(0, 212, 255, 0.2);
+    border-color: var(--color-border-hover);
     transform: translateY(-4px);
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 20px 40px var(--shadow-color-heavy);
   }
 
   &--glass {
-    @include glass-dark(20px, 0.5);
-    border-color: rgba(255, 255, 255, 0.1);
-  }
-}
-
-// 浅色主题下的卡片样式
-:root:not(.dark) .card {
-  border-color: rgba(0, 0, 0, 0.1);
-
-  &:hover {
-    border-color: rgba(0, 212, 255, 0.3);
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+    background: var(--glass-bg);
+    backdrop-filter: blur(20px);
+    border-color: var(--glass-border);
   }
 }
 
@@ -343,7 +279,7 @@ select {
   background: linear-gradient(
     90deg,
     transparent,
-    rgba(255, 255, 255, 0.1) 50%,
+    var(--color-border) 50%,
     transparent
   );
   margin-block: spacing('8');

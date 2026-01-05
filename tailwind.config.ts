@@ -1,15 +1,15 @@
 import type { Config } from 'tailwindcss';
 
 export default {
-  // 暗黑模式配置 - 使用 class 策略
-  darkMode: 'class',
+  // 暗黑模式配置
+  darkMode: 'selector', // 'class' 或 'selector'
 
   // 内容扫描路径
   content: [
-    './components/**/*.{js,vue,ts}',
-    './layouts/**/*.vue',
-    './pages/**/*.vue',
-    './plugins/**/*.{js,ts}',
+    './app/components/**/*.{js,vue,ts}',
+    './app/layouts/**/*.vue',
+    './app/pages/**/*.vue',
+    './app/plugins/**/*.{js,ts}',
     './app.vue',
     './error.vue',
     './composables/**/*.{js,ts}'

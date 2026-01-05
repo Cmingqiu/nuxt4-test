@@ -193,7 +193,7 @@ const filteredCases = computed(() => {
     }
     
     &--active {
-      color: var(--color-dark);
+      color: #{color('dark')};
       background: linear-gradient(135deg, color('primary'), color('accent'));
       border-color: transparent;
     }

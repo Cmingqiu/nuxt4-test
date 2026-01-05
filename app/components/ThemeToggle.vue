@@ -114,7 +114,7 @@ const currentThemeInfo = computed(() => {
   padding: 0;
   border: none;
   border-radius: 0.5rem;
-  background: rgba(255, 255, 255, 0.05);
+  background: var(--color-border-light);
   color: var(--color-text-primary);
   cursor: pointer;
   transition: all 0.25s ease;
@@ -122,7 +122,7 @@ const currentThemeInfo = computed(() => {
   -webkit-backdrop-filter: blur(10px);
 
   &:hover {
-    background: rgba(255, 255, 255, 0.1);
+    background: var(--color-border);
     transform: scale(1.05);
   }
 
@@ -154,10 +154,10 @@ const currentThemeInfo = computed(() => {
   right: 0;
   min-width: 10rem;
   padding: 0.5rem;
-  background: var(--color-dark-soft);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: var(--glass-bg);
+  border: 1px solid var(--color-border);
   border-radius: 0.75rem;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 10px 30px var(--shadow-color-heavy);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
   z-index: 1000;
@@ -179,7 +179,7 @@ const currentThemeInfo = computed(() => {
   font-size: 0.875rem;
 
   &:hover {
-    background: rgba(255, 255, 255, 0.05);
+    background: var(--color-border-light);
     color: var(--color-text-primary);
   }
 
@@ -215,27 +215,5 @@ const currentThemeInfo = computed(() => {
   transform: translateY(-10px) scale(0.95);
 }
 
-// 暗黑模式样式
-:global(.dark) {
-  .theme-toggle__button {
-    background: rgba(255, 255, 255, 0.05);
-  }
-
-  .theme-toggle__dropdown {
-    background: rgba(18, 18, 26, 0.95);
-    border-color: rgba(255, 255, 255, 0.1);
-  }
-}
-
-// 浅色模式样式
-:global(:not(.dark)) {
-  .theme-toggle__button {
-    background: rgba(0, 0, 0, 0.05);
-  }
-
-  .theme-toggle__dropdown {
-    background: rgba(255, 255, 255, 0.95);
-    border-color: rgba(0, 0, 0, 0.1);
-  }
-}
+// 主题样式现在通过 CSS 变量自动处理
 </style>

@@ -240,7 +240,7 @@ const contactInfo = [
     width: 80px;
     height: 80px;
     font-size: 2.5rem;
-    color: var(--color-dark);
+    color: #{color('dark')};
     background: linear-gradient(135deg, color('primary'), color('accent'));
     border-radius: 50%;
     margin-bottom: spacing('6');
@@ -274,8 +274,8 @@ const contactInfo = [
     padding: spacing('3') spacing('4');
     font-size: font-size('base');
     color: var(--color-text-primary);
-    background: var(--color-dark-muted);
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    background: var(--color-bg-muted);
+    border: 1px solid var(--color-border);
     border-radius: map.get($radius, 'lg');
     @include transition(all);
     
@@ -351,7 +351,7 @@ const contactInfo = [
   &__map {
     border-radius: map.get($radius, 'xl');
     overflow: hidden;
-    background: var(--color-dark-muted);
+    background: var(--color-bg-muted);
   }
   
   &__map-placeholder {

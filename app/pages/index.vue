@@ -305,9 +305,10 @@ const testimonials = [
     position: relative;
     z-index: 1;
     padding: spacing('6');
-    background: rgba(10, 10, 15, 0.8);
-    border: 1px solid rgba(0, 212, 255, 0.3);
+    background: var(--glass-bg);
+    border: 1px solid var(--color-border-hover);
     border-radius: map.get($radius, 'lg');
+    backdrop-filter: blur(10px);
     
     pre {
       margin: 0;
@@ -338,8 +339,8 @@ const testimonials = [
 // ================================
 .stats {
   padding-block: spacing('12');
-  background: var(--color-dark-soft);
-  border-block: 1px solid rgba(255, 255, 255, 0.05);
+  background: var(--color-bg-soft);
+  border-block: 1px solid var(--color-border-light);
   
   &__grid {
     display: grid;

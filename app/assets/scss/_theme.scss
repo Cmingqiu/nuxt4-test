@@ -1,0 +1,109 @@
+// ================================
+// 🎨 主题系统 - CSS 变量
+// ================================
+// 支持浅色/暗色主题切换
+// 使用 :root 和 :root.dark 选择器区分主题
+
+@use 'sass:map';
+@use 'variables' as *;
+@use 'mixins' as *;
+
+// ================================
+// 主题无关的全局变量
+// ================================
+:root {
+  // 主色调（两种主题共用）
+  --color-primary: #{color('primary')};
+  --color-primary-dark: #{color('primary-dark')};
+  --color-primary-light: #{color('primary-light')};
+  --color-accent: #{color('accent')};
+  --color-accent-dark: #{color('accent-dark')};
+  --color-accent-light: #{color('accent-light')};
+
+  // 功能色
+  --color-success: #{color('success')};
+  --color-warning: #{color('warning')};
+  --color-error: #{color('error')};
+
+  // 字体
+  --font-primary: #{$font-family-primary};
+  --font-display: #{$font-family-display};
+  --font-mono: #{$font-family-mono};
+
+  // 容器
+  --container-max-width: #{$container-max-width};
+  --container-padding: #{$container-padding};
+
+  // 头部高度
+  --header-height: 70px;
+
+  @include mobile-only {
+    --header-height: 60px;
+  }
+}
+
+// ================================
+// 浅色主题（默认）
+// ================================
+:root {
+  // 背景色
+  --color-bg: #{color('light')};
+  --color-bg-soft: #{color('light-soft')};
+  --color-bg-muted: #{color('light-muted')};
+  --color-bg-elevated: #ffffff;
+
+  // 文字颜色
+  --color-text-primary: #{color('dark')};
+  --color-text-secondary: #475569;
+  --color-text-muted: #64748b;
+
+  // 边框颜色
+  --color-border: rgba(0, 0, 0, 0.1);
+  --color-border-light: rgba(0, 0, 0, 0.05);
+  --color-border-hover: rgba(0, 212, 255, 0.3);
+
+  // 阴影颜色
+  --shadow-color: rgba(0, 0, 0, 0.1);
+  --shadow-color-heavy: rgba(0, 0, 0, 0.15);
+
+  // 玻璃效果背景
+  --glass-bg: rgba(255, 255, 255, 0.8);
+  --glass-border: rgba(255, 255, 255, 0.3);
+
+  // 滚动条
+  --scrollbar-track: #{color('light-muted')};
+  --scrollbar-thumb: #{color('primary')};
+}
+
+// ================================
+// 暗色主题
+// ================================
+:root.dark {
+  // 背景色
+  --color-bg: #{color('dark')};
+  --color-bg-soft: #{color('dark-soft')};
+  --color-bg-muted: #{color('dark-muted')};
+  --color-bg-elevated: #{color('dark-soft')};
+
+  // 文字颜色
+  --color-text-primary: #{color('text-primary')};
+  --color-text-secondary: #{color('text-secondary')};
+  --color-text-muted: #{color('text-muted')};
+
+  // 边框颜色
+  --color-border: rgba(255, 255, 255, 0.1);
+  --color-border-light: rgba(255, 255, 255, 0.05);
+  --color-border-hover: rgba(0, 212, 255, 0.3);
+
+  // 阴影颜色
+  --shadow-color: rgba(0, 0, 0, 0.3);
+  --shadow-color-heavy: rgba(0, 0, 0, 0.5);
+
+  // 玻璃效果背景
+  --glass-bg: rgba(10, 10, 15, 0.8);
+  --glass-border: rgba(255, 255, 255, 0.1);
+
+  // 滚动条
+  --scrollbar-track: #{color('dark-muted')};
+  --scrollbar-thumb: #{color('primary')};
+}

@@ -220,7 +220,7 @@ const process = [
 }
 
 .process {
-  background: var(--color-dark-soft);
+  background: var(--color-bg-soft);
 
   &__header {
     text-align: center;

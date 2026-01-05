@@ -277,7 +277,7 @@ const values = [
     padding: spacing('2') spacing('3');
     font-size: font-size('sm');
     font-weight: map.get($font-weights, 'bold');
-    color: var(--color-dark);
+    color: #{color('dark')};
     background: linear-gradient(135deg, color('primary'), color('accent'));
     border-radius: map.get($radius, 'full');
     
