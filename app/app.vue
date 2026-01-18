@@ -2,14 +2,12 @@
 // 应用根组件
 useHead({
   titleTemplate: (titleChunk?: string) => {
-    return titleChunk
-      ? `${titleChunk} - 科技未来`
-      : '科技未来 - 引领数字化转型';
-  }
+    return titleChunk ? `${titleChunk} - 科技未来` : "科技未来 - 引领数字化转型";
+  },
 });
 
 const { title } = useAppConfig();
-console.log('useAppConfig: ', title);
+console.log("useAppConfig: ", title);
 </script>
 
 <template>
